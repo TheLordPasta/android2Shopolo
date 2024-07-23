@@ -3,7 +3,7 @@ import SignUpFormDrawer from "./components/SignUpFormDrawer";
 import LoginFormDrawer from "./components/LoginFormDrawer";
 import Tabs from "./components/CategotiesTabs";
 import StartUpContainerLogo from "./components/StartUpContainerLogo";
-import ProductCard from "./components/ProductCard";
+import products from "./products";
 import logo from "./resourses/logoShopolo.png";
 import SearchBar from "./components/SearchBar";
 
@@ -42,7 +42,7 @@ function App() {
       <SignUpFormDrawer />
       <LoginFormDrawer />
       <Tabs
-        menItems={menItems}
+        menItems={products}
         womenItems={womenItems}
         creatureItems={creatureItems}
       />

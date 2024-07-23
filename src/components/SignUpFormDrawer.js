@@ -4,6 +4,7 @@ import React, { useState } from "react";
 //import axios from "axios";
 import "../styles/basic-form.css";
 import "../App.css";
+import logo from "../resourses/logoShopolo.png";
 
 function SignUpFormDrawer() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -28,6 +29,7 @@ function SignUpFormDrawer() {
   return (
     <>
       <Drawer opened={opened} onClose={close} title="Sign Up To Shoppolo">
+        <img src={logo} />
         <div className="basic-form">
           <h2>Sign Up</h2>
           <form onSubmit={handleSubmit}>

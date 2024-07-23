@@ -1,7 +1,7 @@
 import React from "react";
-import "./ProductCard.css";
+import "../styles/ProductCard.css";
 
-const ProductCard = ({ image, name, description }) => {
+const ProductCard = ({ image, name, description, id, price }) => {
   return (
     <div className="product-card">
       <div className="product-image">

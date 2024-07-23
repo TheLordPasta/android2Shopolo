@@ -3,6 +3,7 @@ import { Drawer, Button } from "@mantine/core";
 import React, { useState } from "react";
 import "../styles/basic-form.css";
 import "../App.css";
+import logo from "../resourses/logoShopolo.png";
 
 function LoginFormDrawer() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -23,6 +24,7 @@ function LoginFormDrawer() {
   return (
     <>
       <Drawer opened={opened} onClose={close} title="Log In To Shoppolo">
+        <img src={logo} />
         <div className="basic-form">
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>

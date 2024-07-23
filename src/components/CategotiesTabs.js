@@ -6,6 +6,7 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import ProductCard from "./ProductCard";
+import SearchBar from "./SearchBar";
 
 function CategotiesTabs({ menItems, womenItems, creatureItems }) {
   const iconStyle = { width: rem(12), height: rem(12) };
@@ -36,34 +37,43 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.List>
 
       <Tabs.Panel value="men">
+        <SearchBar />
         {menItems.map((item, index) => (
           <ProductCard
             key={index}
             image={item.image}
             name={item.name}
             description={item.description}
+            price={item.price}
+            id={item.id}
           />
         ))}
       </Tabs.Panel>
 
       <Tabs.Panel value="women">
+        <SearchBar />
         {womenItems.map((item, index) => (
           <ProductCard
             key={index}
             image={item.image}
             name={item.name}
             description={item.description}
+            price={item.price}
+            id={item.id}
           />
         ))}
       </Tabs.Panel>
 
       <Tabs.Panel value="creatures">
+        <SearchBar />
         {creatureItems.map((item, index) => (
           <ProductCard
             key={index}
             image={item.image}
             name={item.name}
             description={item.description}
+            price={item.price}
+            id={item.id}
           />
         ))}
       </Tabs.Panel>
