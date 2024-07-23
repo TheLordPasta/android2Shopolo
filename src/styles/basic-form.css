@@ -1,3 +1,4 @@
+@import "~@mantine/core/styles.css";
 .basic-form {
   max-width: 300px;
   margin: auto;
@@ -10,13 +11,13 @@
   margin: 5px 0;
   border-radius: 2%;
   border-bottom-width: 5px;
-  border-bottom-color: darkslateblue;
+  border-bottom-color: var(--color-primary);
 }
 .basic-form button {
   width: 100%;
   padding: 10px;
-  background-color: darkslateblue;
-  color: white;
+  background-color: var(--color-primary);
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;

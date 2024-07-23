@@ -1,7 +1,7 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Drawer, Button } from "@mantine/core";
 import React, { useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import "../styles/basic-form.css";
 import "../App.css";
 
@@ -14,11 +14,11 @@ function SignUpFormDrawer() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/signup", {
+      /*const response = await axios.post("http://localhost:5000/signup", {
         username,
         password,
         email,
-      });
+      });*/
       console.log("mor succeded");
     } catch (error) {
       //setMessage("Sign-up failed: " + error.response.data);
@@ -57,7 +57,7 @@ function SignUpFormDrawer() {
         </div>
       </Drawer>
 
-      <Button color="darkslateblue" variant="filled" onClick={open}>
+      <Button color="var(--color-primary)" variant="filled" onClick={open}>
         Sign Up
       </Button>
     </>

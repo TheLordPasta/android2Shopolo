@@ -1,0 +1,23 @@
+#startup-container {
+  background-color: var(--color-primary);
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  /* Assuming you have a custom font imported */
+  font-family: "Roboto", sans-serif;
+}
+
+.slogan {
+  font-size: 1.5rem;
+  font-style: italic;
+  opacity: 0.8;
+}

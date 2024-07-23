@@ -1,8 +1,7 @@
-@import "~@mantine/core/styles.css";
-
 /*colors*/
+@import "~@mantine/core/styles.css";
 :root {
-  --color-button: darkslateblue;
+  --color-primary: #a55aff;
   --color-heading: #eaf3db;
   --color-base: #034730;
   --color-base2: #023024;
@@ -13,14 +12,9 @@
   --font-base: "Bai Jamjuree";
 }
 
-Button {
-  color: #212529;
-  background-color: #52bebe;
-  border-color: #8ad3d3;
-}
-
 .App {
   text-align: center;
+  margin: 20px;
 }
 
 .App-logo {
@@ -56,4 +50,10 @@ Button {
   to {
     transform: rotate(360deg);
   }
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

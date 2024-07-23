@@ -46,7 +46,7 @@ function LoginFormDrawer() {
         </div>
       </Drawer>
 
-      <Button color="darkslateblue" variant="filled" onClick={open}>
+      <Button color="var(--color-primary)" variant="filled" onClick={open}>
         Login
       </Button>
     </>
