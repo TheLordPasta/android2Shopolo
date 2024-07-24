@@ -1,26 +1,30 @@
-import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Button } from "@mantine/core";
 import React, { useState } from "react";
+import { useDisclosure } from "@mantine/hooks";
+import { Drawer, Button, TextInput } from "@mantine/core";
 import "../styles/basic-form.css";
 import "../App.css";
 import logo from "../resourses/logoShopolo.png";
 
 function LoginFormDrawer() {
   const [opened, { open, close }] = useDisclosure(false);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (username === "admin" && password === "password") {
-      setMessage("Login successful!");
-    } else {
-      setMessage("Invalid username or password.");
+    try {
+      // Replace this with your actual login logic
+      if (username === "admin" && password === "password") {
+        setMessage("Login successful!");
+      } else {
+        setMessage("Invalid username or password.");
+      }
+    } catch (error) {
+      setMessage("Login failed. Please try again.");
     }
   };
+
   return (
     <>
       <Drawer opened={opened} onClose={close} title="Log In To Shoppolo">
@@ -28,21 +32,29 @@ function LoginFormDrawer() {
         <div className="basic-form">
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>
-            <input
+            <TextInput
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
               required
             />
-            <input
+            <TextInput
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
             />
-            <button type="submit">Login</button>
+            <Button
+              type="submit"
+              color="var(--color-primary)"
+              variant="filled"
+              fullWidth
+              mt="md"
+            >
+              Login
+            </Button>
           </form>
           <p>{message}</p>
         </div>

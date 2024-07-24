@@ -2,7 +2,7 @@
 @import "~@mantine/core/styles.css";
 :root {
   --color-primary: #a55aff;
-  --color-heading: #eaf3db;
+  --color-gradient: #895aff;
   --color-base: #034730;
   --color-base2: #023024;
   --color-brand: #506de1;
@@ -50,10 +50,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }

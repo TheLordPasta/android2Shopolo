@@ -1,51 +1,34 @@
 import React, { useState } from "react";
+import Navbar from "./components/Navbar";
 import SignUpFormDrawer from "./components/SignUpFormDrawer";
 import LoginFormDrawer from "./components/LoginFormDrawer";
 import Tabs from "./components/CategotiesTabs";
 import StartUpContainerLogo from "./components/StartUpContainerLogo";
 import products from "./products";
-import logo from "./resourses/logoShopolo.png";
-import SearchBar from "./components/SearchBar";
+import ShoppingCart from "./components/ShoppingCart";
 
 function App() {
-  const menItems = [
-    { image: logo, name: "Product 1", description: "Description 1" },
-    { image: logo, name: "Product 2", description: "Description 2" },
-    // Add more items as needed
-  ];
+  const [cartOpen, setCartOpen] = useState(false);
+  const [signInOpen, setSignInOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
-  const womenItems = [
-    { image: logo, name: "Product 3", description: "Description 3" },
-    { image: logo, name: "Product 4", description: "Description 4" },
-    // Add more items as needed
-  ];
-
-  const creatureItems = [
-    { image: logo, name: "Product 5", description: "Description 5" },
-    { image: logo, name: "Product 6", description: "Description 6" },
-    // Add more items as needed
-  ];
-
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  const handleSignIn = () => setSignInOpen(true);
+  const handleLogin = () => setLoginOpen(true);
 
   return (
     <div className="App">
-      <SearchBar
-        searchTerm={searchTerm}
-        handleSearchChange={handleSearchChange}
+      <Navbar
+        onSignIn={handleSignIn}
+        onLogin={handleLogin}
+        onCartOpen={() => setCartOpen(true)}
       />
       <StartUpContainerLogo />
-      <SignUpFormDrawer />
-      <LoginFormDrawer />
       <Tabs
         menItems={products}
-        womenItems={womenItems}
-        creatureItems={creatureItems}
+        womenItems={products}
+        creatureItems={products}
       />
+      <ShoppingCart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </div>
   );
 }

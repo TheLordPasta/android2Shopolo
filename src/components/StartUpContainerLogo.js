@@ -5,7 +5,7 @@ import logo from "../resourses/logoShopolo.png";
 //const logo = src
 function StartUpContainerLogo() {
   const demoProps = {
-    bg: "white",
+    bg: "transparent",
     p: "0px",
     h: "500px",
   };

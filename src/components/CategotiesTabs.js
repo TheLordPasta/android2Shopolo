@@ -1,5 +1,5 @@
-import React from "react";
-import { Tabs, rem } from "@mantine/core";
+import React, { useState } from "react";
+import { Tabs, rem, SimpleGrid } from "@mantine/core";
 import {
   IconPhoto,
   IconMessageCircle,
@@ -9,7 +9,12 @@ import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 
 function CategotiesTabs({ menItems, womenItems, creatureItems }) {
-  const iconStyle = { width: rem(12), height: rem(12) };
+  const iconStyle = { width: rem(30), height: rem(30) };
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <Tabs
@@ -17,8 +22,15 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       radius="lg"
       orientation="vertical"
       defaultValue="men" // Set a default value
+      size="lg"
+      styles={{
+        tabLabel: {
+          fontSize: rem(30), // Adjust the font size here
+          fontWeight: 500, // Optional: Adjust the font weight if needed
+        },
+      }}
     >
-      <Tabs.List>
+      <Tabs.List className="Tabs">
         <Tabs.Tab value="men" leftSection={<IconPhoto style={iconStyle} />}>
           Men
         </Tabs.Tab>
@@ -37,45 +49,60 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.List>
 
       <Tabs.Panel value="men">
-        <SearchBar />
-        {menItems.map((item, index) => (
-          <ProductCard
-            key={index}
-            image={item.image}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            id={item.id}
-          />
-        ))}
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+        />
+        <SimpleGrid cols={5} spacing="sm">
+          {menItems.map((item, index) => (
+            <ProductCard
+              key={index}
+              image={item.image}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              id={item.id}
+            />
+          ))}
+        </SimpleGrid>
       </Tabs.Panel>
 
       <Tabs.Panel value="women">
-        <SearchBar />
-        {womenItems.map((item, index) => (
-          <ProductCard
-            key={index}
-            image={item.image}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            id={item.id}
-          />
-        ))}
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+        />
+        <SimpleGrid cols={5} spacing="sm">
+          {womenItems.map((item, index) => (
+            <ProductCard
+              key={index}
+              image={item.image}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              id={item.id}
+            />
+          ))}
+        </SimpleGrid>
       </Tabs.Panel>
 
       <Tabs.Panel value="creatures">
-        <SearchBar />
-        {creatureItems.map((item, index) => (
-          <ProductCard
-            key={index}
-            image={item.image}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            id={item.id}
-          />
-        ))}
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+        />
+        <SimpleGrid cols={5} spacing="sm">
+          {creatureItems.map((item, index) => (
+            <ProductCard
+              key={index}
+              image={item.image}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              id={item.id}
+            />
+          ))}
+        </SimpleGrid>
       </Tabs.Panel>
     </Tabs>
   );
