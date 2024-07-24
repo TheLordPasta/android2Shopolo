@@ -29,7 +29,10 @@ function SignUpFormDrawer() {
   return (
     <>
       <Drawer opened={opened} onClose={close} title="Sign Up To Shoppolo">
-        <img src={logo} />
+        <div className="logo-container">
+          <img src={logo} />
+        </div>
+
         <div className="basic-form">
           <h2>Sign Up</h2>
           <form onSubmit={handleSubmit}>

@@ -28,7 +28,9 @@ function LoginFormDrawer() {
   return (
     <>
       <Drawer opened={opened} onClose={close} title="Log In To Shoppolo">
-        <img src={logo} />
+        <div className="logo-container">
+          <img src={logo} />
+        </div>
         <div className="basic-form">
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>

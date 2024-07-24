@@ -27,3 +27,7 @@
 .basic-form button:hover {
   background-color: rgb(37, 23, 132);
 }
+
+.logo-container img {
+  margin-left: 60px;
+}

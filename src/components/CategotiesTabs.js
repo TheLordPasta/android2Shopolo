@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Tabs, rem, SimpleGrid } from "@mantine/core";
-import {
-  IconPhoto,
-  IconMessageCircle,
-  IconSettings,
-} from "@tabler/icons-react";
+import { IconMan, IconWoman, IconSnowman } from "@tabler/icons-react";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 
@@ -31,18 +27,15 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       }}
     >
       <Tabs.List className="Tabs">
-        <Tabs.Tab value="men" leftSection={<IconPhoto style={iconStyle} />}>
+        <Tabs.Tab value="men" leftSection={<IconMan style={iconStyle} />}>
           Men
         </Tabs.Tab>
-        <Tabs.Tab
-          value="women"
-          leftSection={<IconMessageCircle style={iconStyle} />}
-        >
+        <Tabs.Tab value="women" leftSection={<IconWoman style={iconStyle} />}>
           Women
         </Tabs.Tab>
         <Tabs.Tab
           value="creatures"
-          leftSection={<IconSettings style={iconStyle} />}
+          leftSection={<IconSnowman style={iconStyle} />}
         >
           Creatures
         </Tabs.Tab>
