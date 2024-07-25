@@ -8,6 +8,7 @@ import {
   Group,
   NumberInput,
   SimpleGrid,
+  Flex,
 } from "@mantine/core";
 import "../styles/ProductCard.css";
 import { useCart } from "../contexts/CartContext";
@@ -24,6 +25,47 @@ const ProductCard = ({ id, image, name, description, price }) => {
   return (
     <div className="product-card">
       <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Flex
+      mih={50}
+      bg="rgba(0, 0, 0, .3)"
+      gap="md"
+      justify="flex-start"
+      align="center"
+      direction="column"
+      wrap="wrap"
+      >
+      <Card.Section>
+          <Image
+            className="product-image"
+            src={image}
+            height={160}
+            alt={name}
+          />
+        </Card.Section>
+
+        <Group position="apart" mt="md" mb="xs">
+          <Flex
+          mih={50}
+          bg="rgba(0, 0, 0, .3)"
+          gap="xl"
+          justify="center"
+          align="center"
+          direction="row"
+          wrap="wrap"
+          >
+            <Text fw={500} size="xl">
+            {name}
+          </Text>
+          <Badge fw={300} size="lg" color="pink">
+            {price * quantity} USD
+          </Badge>
+          </Flex>
+        </Group>
+
+        <Text className="product-details" size="md" c="dimmed">
+          {description}
+        </Text>
+      </Flex>
         <Card.Section>
           <Image
             className="product-image"
