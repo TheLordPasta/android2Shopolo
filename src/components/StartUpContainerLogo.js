@@ -1,21 +1,24 @@
-import React from "react";
-import { Container } from "@mantine/core";
-import logo from "../resourses/logoShopolo.png";
+import React, { useEffect, useState } from "react";
+import { Container, useMantineColorScheme } from "@mantine/core";
+import logoLight from "../resourses/logoShopoloLight.png";
+import logoDark from "../resourses/logoShopoloDark.png";
 
-//const logo = src
 function StartUpContainerLogo() {
-  const demoProps = {
-    bg: "transparent",
-    p: "0px",
-    h: "500px",
-  };
+  const { colorScheme } = useMantineColorScheme();
+  const [logoSrc, setLogoSrc] = useState(logoLight); // Initial state with light logo
+
+  useEffect(() => {
+    if (colorScheme === "dark") {
+      setLogoSrc(logoDark);
+    } else {
+      setLogoSrc(logoLight);
+    }
+  }, [colorScheme]);
 
   return (
-    <>
-      <Container px={0} width="100%" {...demoProps}>
-        <img src={logo} />
-      </Container>
-    </>
+    <Container px={0} width="100%">
+      <img src={logoSrc} alt="Shopolo Logo" />
+    </Container>
   );
 }
 

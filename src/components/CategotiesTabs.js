@@ -12,6 +12,19 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
     setSearchTerm(event.target.value);
   };
 
+  // Filter items based on search term
+  const filteredMenItems = menItems.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredWomenItems = womenItems.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredCreatureItems = creatureItems.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Tabs
       color="#a55aff"
@@ -47,7 +60,7 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
           handleSearchChange={handleSearchChange}
         />
         <SimpleGrid cols={5} spacing="sm">
-          {menItems.map((item, index) => (
+          {filteredMenItems.map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
@@ -66,7 +79,7 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
           handleSearchChange={handleSearchChange}
         />
         <SimpleGrid cols={5} spacing="sm">
-          {womenItems.map((item, index) => (
+          {filteredWomenItems.map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
@@ -85,7 +98,7 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
           handleSearchChange={handleSearchChange}
         />
         <SimpleGrid cols={5} spacing="sm">
-          {creatureItems.map((item, index) => (
+          {filteredCreatureItems.map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}

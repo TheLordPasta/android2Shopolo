@@ -3,7 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Drawer, Button, TextInput } from "@mantine/core";
 import "../styles/basic-form.css";
 import "../App.css";
-import logo from "../resourses/logoShopolo.png";
+import StartUpContainerLogo from "./StartUpContainerLogo";
 
 function LoginFormDrawer() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -29,7 +29,7 @@ function LoginFormDrawer() {
     <>
       <Drawer opened={opened} onClose={close} title="Log In To Shoppolo">
         <div className="logo-container">
-          <img src={logo} />
+          <StartUpContainerLogo />
         </div>
         <div className="basic-form">
           <h2>Login</h2>

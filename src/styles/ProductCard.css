@@ -2,15 +2,16 @@
   display: flex;
   overflow: hidden;
   height: fit-content;
-  max-width: 600px;
-  max-height: 550px;
+  min-width: 100px;
+  min-height: 100px;
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   justify-content: center;
+  background: "var(--mantine-color-default-border)";
 }
 
 .product-image {
-  width: 400px;
+  size: auto;
   object-fit: scale-down;
 }
 

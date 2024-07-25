@@ -24,9 +24,15 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
 
   return (
     <Paper
-      padding="md"
-      shadow="xs"
-      style={{ position: "sticky", top: 0, zIndex: 100 }}
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        borderRadius: 0,
+        background: "var(--mantine-color-default-border)",
+        borderWidth: "1px",
+        borderColor: "var(--mantine-color-grape-text)",
+      }}
     >
       <Container>
         <Group position="apart" align="center">
@@ -34,7 +40,7 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
             opened={opened}
             onClick={() => setOpened((o) => !o)}
             size="md"
-            color="gray"
+            color="var(--mantine-color-bright)"
           />
           <Transition transition="slide-right" duration={200} mounted={opened}>
             {(styles) => (
