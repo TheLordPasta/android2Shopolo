@@ -12,17 +12,25 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
     setSearchTerm(event.target.value);
   };
 
+  const filterItems = (items) => {
+    return items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
+
   return (
     <Tabs
       color="#a55aff"
       radius="lg"
       orientation="vertical"
-      defaultValue="men" // Set a default value
+      defaultValue="men"
       size="lg"
       styles={{
         tabLabel: {
-          fontSize: rem(30), // Adjust the font size here
-          fontWeight: 500, // Optional: Adjust the font weight if needed
+          fontSize: rem(30),
+          fontWeight: 500,
         },
       }}
     >
@@ -42,12 +50,9 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.List>
 
       <Tabs.Panel value="men">
-        <SearchBar
-          searchTerm={searchTerm}
-          handleSearchChange={handleSearchChange}
-        />
+        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
         <SimpleGrid cols={5} spacing="sm">
-          {menItems.map((item, index) => (
+          {filterItems(menItems).map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
@@ -61,12 +66,9 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.Panel>
 
       <Tabs.Panel value="women">
-        <SearchBar
-          searchTerm={searchTerm}
-          handleSearchChange={handleSearchChange}
-        />
+        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
         <SimpleGrid cols={5} spacing="sm">
-          {womenItems.map((item, index) => (
+          {filterItems(womenItems).map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
@@ -80,12 +82,9 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.Panel>
 
       <Tabs.Panel value="creatures">
-        <SearchBar
-          searchTerm={searchTerm}
-          handleSearchChange={handleSearchChange}
-        />
+        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
         <SimpleGrid cols={5} spacing="sm">
-          {creatureItems.map((item, index) => (
+          {filterItems(creatureItems).map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
