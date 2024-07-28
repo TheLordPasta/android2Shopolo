@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const PaymentMethod = ({ prevStep }) => {
   const [paymentDetails, setPaymentDetails] = useState({
-    cardNumber: '',
-    expirationDate: '',
-    cvv: ''
+    cardNumber: "",
+    expirationDate: "",
+    cvv: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add logic for payment processing here
-    alert('Payment processed successfully!');
+    alert("Payment processed successfully!");
   };
 
   return (
@@ -52,8 +52,6 @@ const PaymentMethod = ({ prevStep }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="button" onClick={prevStep}>Back</button>
-        <button type="submit">Submit Payment</button>
       </form>
     </div>
   );

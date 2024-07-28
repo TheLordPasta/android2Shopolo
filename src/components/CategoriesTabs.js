@@ -50,13 +50,17 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.List>
 
       <Tabs.Panel value="men">
-        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+        />
         <SimpleGrid cols={5} spacing="sm">
           {filterItems(menItems).map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
               name={item.name}
+              category={item.category}
               description={item.description}
               price={item.price}
               id={item.id}
@@ -66,13 +70,17 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.Panel>
 
       <Tabs.Panel value="women">
-        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+        />
         <SimpleGrid cols={5} spacing="sm">
           {filterItems(womenItems).map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
               name={item.name}
+              category={item.category}
               description={item.description}
               price={item.price}
               id={item.id}
@@ -82,13 +90,17 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
       </Tabs.Panel>
 
       <Tabs.Panel value="creatures">
-        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+        />
         <SimpleGrid cols={5} spacing="sm">
           {filterItems(creatureItems).map((item, index) => (
             <ProductCard
               key={index}
               image={item.image}
               name={item.name}
+              category={item.category}
               description={item.description}
               price={item.price}
               id={item.id}

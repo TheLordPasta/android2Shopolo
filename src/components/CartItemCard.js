@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// src/components/CartItemCard.js
+
+import React from "react";
 import {
   Card,
   Image,
@@ -7,20 +9,18 @@ import {
   Button,
   Group,
   NumberInput,
-  SimpleGrid,
 } from "@mantine/core";
 import "../styles/ProductCard.css";
-import { useCart } from "../contexts/CartContext";
 
-const ProductCard = ({ id, image, name, description, price, category }) => {
-  const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useCart();
-
-  const handleAddToCart = () => {
-    const product = { id, image, name, description, price, category, quantity };
-    addToCart(product, quantity);
-  };
-
+const CartItemCard = ({
+  id,
+  image,
+  name,
+  price,
+  quantity,
+  onQuantityChange,
+  onRemove,
+}) => {
   return (
     <div className="product-card">
       <Card
@@ -45,34 +45,22 @@ const ProductCard = ({ id, image, name, description, price, category }) => {
             {price * quantity} USD
           </Badge>
         </Group>
-
-        <Text className="product-details" size="md" c="dimmed">
-          {description}
-        </Text>
-        <SimpleGrid cols={2}>
+        <Group position="apart" mt="md">
           <NumberInput
             value={quantity}
-            onChange={setQuantity}
+            onChange={(value) => onQuantityChange(id, value)}
             ml="sm"
-            mt="md"
             w="70px"
             min={1}
             step={1}
-            style={{ flex: 1 }}
           />
-          <Button
-            color="var(--color-primary)"
-            ml="sm"
-            mt="md"
-            radius="md"
-            onClick={handleAddToCart}
-          >
-            Add to Cart
+          <Button color="red" ml="sm" radius="md" onClick={() => onRemove(id)}>
+            Remove
           </Button>
-        </SimpleGrid>
+        </Group>
       </Card>
     </div>
   );
 };
 
-export default ProductCard;
+export default CartItemCard;

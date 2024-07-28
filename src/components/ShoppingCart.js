@@ -1,51 +1,59 @@
 // src/components/ShoppingCart.js
 
-import React from "react";
-import { Drawer, Group, Text, Button } from "@mantine/core";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Group, Text, SimpleGrid } from "@mantine/core";
 import { useCart } from "../contexts/CartContext";
+import CartItemCard from "./CartItemCard";
 
-const ShoppingCart = ({ isOpen, onClose }) => {
+const ShoppingCart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
+  const [cartItems, setCartItems] = useState(cart);
 
-  const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  // Function to update quantity
+  const handleQuantityChange = (id, quantity) => {
+    updateQuantity(id, quantity);
+    setCartItems(
+      cartItems.map((item) => (item.id === id ? { ...item, quantity } : item))
+    );
+  };
+
+  // Function to handle item removal
+  const handleRemoveFromCart = (id) => {
+    removeFromCart(id);
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
+
+  const totalAmount = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   return (
-    <Drawer
-      opened={isOpen}
-      onClose={onClose}
-      title="Shopping Cart"
-      padding="xl"
-      size="lg"
-    >
-      {cart.length === 0 ? (
-        <Text>Your cart is empty</Text>
-      ) : (
-        <>
-          {cart.map((item) => (
-            <Group key={item.id} position="apart" style={{ marginBottom: 10 }}>
-              <Text>{item.name}</Text>
-              <Text>{item.price}</Text>
-              <Button onClick={() => removeFromCart(item.id)}>Remove</Button>
-              <input
-                type="number"
-                value={item.quantity}
-                onChange={(e) =>
-                  updateQuantity(item.id, parseInt(e.target.value, 10))
-                }
-                min="1"
+    <div>
+      <SimpleGrid cols={4}>
+        {cartItems.length === 0 ? (
+          <Text>Your cart is empty</Text>
+        ) : (
+          <>
+            {cartItems.map((item) => (
+              <CartItemCard
+                key={item.id}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                id={item.id}
+                quantity={item.quantity}
+                onQuantityChange={handleQuantityChange}
+                onRemove={handleRemoveFromCart}
               />
-            </Group>
-          ))}
-          <Group position="apart" style={{ marginTop: 20 }}>
-            <Text>Total: ${totalAmount.toFixed(2)}</Text>
-            <Link to="/checkout">
-              <Button>Proceed to Checkout</Button>
-            </Link>
-          </Group>
-        </>
-      )}
-    </Drawer>
+            ))}
+          </>
+        )}
+      </SimpleGrid>
+      <Group position="apart" style={{ marginTop: 20, marginBottom: 20 }}>
+        <Text>Total: ${totalAmount.toFixed(2)}</Text>
+      </Group>
+    </div>
   );
 };
 

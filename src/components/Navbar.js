@@ -42,13 +42,20 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
             size="md"
             color="var(--mantine-color-bright)"
           />
-          <Transition transition="slide-right" duration={200} mounted={opened}>
+          <Transition
+            background="var(--color-primary)"
+            transition="slide-right"
+            duration={200}
+            mounted={opened}
+          >
             {(styles) => (
               <div style={styles}>
                 <Group direction="column" spacing="xs" align="flex-start">
                   <LoginFormDrawer />
                   <SignUpFormDrawer />
-                  <Button onClick={onCartOpen}>Cart</Button>
+                  <Button color="var(--color-primary)" onClick={onCartOpen}>
+                    Cart
+                  </Button>
                   <Group spacing="xs" align="center">
                     <Text>{colorScheme} Mode</Text>
                     <Switch

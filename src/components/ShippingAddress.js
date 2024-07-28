@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ShippingAddress = ({ nextStep, prevStep }) => {
   const [address, setAddress] = useState({
-    street: '',
-    city: '',
-    state: '',
-    zip: ''
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddress((prevAddress) => ({
       ...prevAddress,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -61,8 +61,6 @@ const ShippingAddress = ({ nextStep, prevStep }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="button" onClick={prevStep}>Back</button>
-        <button type="submit">Next</button>
       </form>
     </div>
   );

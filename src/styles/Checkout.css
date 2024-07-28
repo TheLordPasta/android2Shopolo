@@ -1,0 +1,49 @@
+.checkout {
+  padding: 20px;
+  width: 800px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  height: 100%;
+}
+
+.checkout h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.checkout h3 {
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+.checkout ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.checkout li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.checkout form div {
+  margin-bottom: 10px;
+}
+
+.checkout form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.checkout form input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.checkout form button {
+  padding: 10px 20px;
+  margin: 10px;
+}
