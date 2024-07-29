@@ -4,12 +4,16 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
-
+const ProductModel = require('./models/products')
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: 'GET,POST',
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 // MongoDB connection
@@ -38,16 +42,18 @@ app.post("/signup", (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "/build")));
-
-// Handle React routing, return all requests to React app
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
-
-
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+app.use(express.json())
+
+app.get('/getProducts', (req, res) => {
+  ProductModel.find()
+    .then(products => res.json(products))
+    .catch(err => {
+      console.log('Error fetching products:', err);
+      res.status(500).json({ message: 'Failed to fetch products' });
+    });
+  });

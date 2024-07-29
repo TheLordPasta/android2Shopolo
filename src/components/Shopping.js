@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import Navbar from "./Navbar";
 import CategoriesTabs from "./CategoriesTabs";
 import StartUpContainerLogo from "./StartUpContainerLogo";
-import products from "../products";
 import ShoppingCartDrawer from "./ShoppingCartDrawer";
+import axios from "axios";
 
 function Shopping() {
   const [cartOpen, setCartOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-
   const handleSignIn = () => setSignInOpen(true);
   const handleLogin = () => setLoginOpen(true);
+  const [products, setProducts] = useState([])
+  useEffect(()=> {
+    axios.get('http://localhost:5000/getProducts')
+    .then(products => setProducts(products.data))
+    .catch(err => console.log(err))
+  }, [])
 
   return (
     <div className="Shopping">
@@ -22,10 +27,10 @@ function Shopping() {
       />
       <StartUpContainerLogo />
       <CategoriesTabs
-        menItems={products.filter((product) => product.category === "Men")}
-        womenItems={products.filter((product) => product.category === "Women")}
+        menItems={products.filter((products) => products.category === "Men")}
+        womenItems={products.filter((products) => products.category === "Women")}
         creatureItems={products.filter(
-          (product) => product.category === "Mythical Creatures"
+          (products) => products.category === "Mythical Creatures"
         )}
       />
       <ShoppingCartDrawer
