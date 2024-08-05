@@ -36,6 +36,7 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
     >
       <Container>
         <Group position="apart" align="center">
+          <h1>hello guest!</h1>
           <Burger
             opened={opened}
             onClick={() => setOpened((o) => !o)}
