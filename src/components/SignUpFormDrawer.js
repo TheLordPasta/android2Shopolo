@@ -12,18 +12,30 @@ function SignUpFormDrawer() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // State to store the error message
+  const [successMessage, setSuccessMessage] = useState(""); // Optional state to store success message
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3030/signup", {
+      const response = await axios.post("http://localhost:5000/signup", {
         username,
         password,
         email,
       });
-      console.log("mor succeded");
+      setSuccessMessage("Sign-up succeeded!");
+      setErrorMessage("");
+      setUsername("");
+      setEmail("");
+      setPassword("");
     } catch (error) {
-      //setMessage("Sign-up failed: " + error.response.data);
-      console.log("mor un-succeded");
+      if (error.response) {
+        setErrorMessage(error.response.data.message);
+      } else if (error.request) {
+        setErrorMessage("No response received from server");
+      } else {
+        setErrorMessage("Error: " + error.message);
+      }
+      setSuccessMessage("");
     }
   };
   return (
@@ -58,6 +70,10 @@ function SignUpFormDrawer() {
             />
             <button type="submit">Sign Up</button>
           </form>
+          {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}{" "}
+          {/* Display success message */}
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}{" "}
+          {/* Display error message */}
         </div>
       </Drawer>
 

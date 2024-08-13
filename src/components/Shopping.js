@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import CategoriesTabs from "./CategoriesTabs";
 import StartUpContainerLogo from "./StartUpContainerLogo";
 import ShoppingCartDrawer from "./ShoppingCartDrawer";
-import AddProductForm from "./AddProductForm";
+import ConditionalAddProductForm from "./ConditionalAddProductForm";
 import axios from "axios";
 
 function Shopping() {
@@ -31,7 +31,8 @@ function Shopping() {
         onCartOpen={() => setCartOpen(true)}
       />
       <StartUpContainerLogo />
-      <AddProductForm onProductAdded={handleProductAdded} />
+
+      <ConditionalAddProductForm onProductAdded={handleProductAdded} />
       <CategoriesTabs
         menItems={products.filter((product) => product.category === "Men")}
         womenItems={products.filter((product) => product.category === "Women")}

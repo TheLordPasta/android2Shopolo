@@ -1,9 +1,11 @@
+const { List } = require("@mantine/core");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  username: String,
+  username: { type: String, unique: true },
   password: String,
-  email: String,
+  email: { type: String, unique: true },
+  userType: String,
 });
 
 const User = mongoose.model("User", UserSchema);

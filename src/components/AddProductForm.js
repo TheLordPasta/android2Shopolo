@@ -55,7 +55,7 @@ const AddProductForm = ({ onProductAdded }) => {
         value={category}
         onChange={(e) => setCategory(e.target.value)}
       />
-      <Button type="submit" mt="md">
+      <Button type="submit" mt="md" color="var(--color-primary)">
         Add Product
       </Button>
     </form>

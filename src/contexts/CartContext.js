@@ -5,7 +5,9 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      const existingItemIndex = state.findIndex(item => item.id === action.product.id);
+      const existingItemIndex = state.findIndex(
+        (item) => item.name === action.product.name
+      );
       if (existingItemIndex > -1) {
         // If the item is already in the cart, increase its quantity
         return state.map((item, index) =>

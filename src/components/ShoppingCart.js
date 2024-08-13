@@ -30,7 +30,7 @@ const ShoppingCart = () => {
 
   return (
     <div>
-      <SimpleGrid cols={4}>
+      <SimpleGrid cols={3}>
         {cartItems.length === 0 ? (
           <Text>Your cart is empty</Text>
         ) : (

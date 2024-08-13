@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useUserData from "./useUserData";
 import {
   Container,
   Group,
@@ -16,6 +17,7 @@ import SignUpFormDrawer from "./SignUpFormDrawer";
 const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
   const [opened, setOpened] = useState(false);
   const { colorScheme, setColorScheme } = useMantineColorScheme(); // Correct hook usage
+  const { userData } = useUserData();
 
   const toggleColorScheme = () => {
     const newColorScheme = colorScheme === "dark" ? "light" : "dark";
@@ -36,7 +38,13 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
     >
       <Container>
         <Group position="apart" align="center">
-          <h1>hello guest!</h1>
+          <h1
+            style={{
+              textShadow: "4px 4px var(--color-primary)",
+            }}
+          >
+            Hello {userData?.username || "Guest"}
+          </h1>
           <Burger
             opened={opened}
             onClick={() => setOpened((o) => !o)}
