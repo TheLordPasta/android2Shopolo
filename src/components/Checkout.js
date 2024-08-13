@@ -4,28 +4,46 @@ import "../styles/Checkout.css";
 import ShippingAddress from "./ShippingAddress";
 import PaymentMethod from "./PaymentMethod";
 import ShoppingCart from "./ShoppingCart";
+import { useCart } from '../contexts/CartContext';
 import axios from "axios";
 import videosrc from "../resourses/exampleMP4.mp4";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const [active, setActive] = useState(0);
   const [orderData, setOrderData] = useState({});
+  const { cart } = useCart();
+  const navigate = useNavigate();
 
-  const nextStep = () => {
+
+  const nextStep = async () => {
+    if (active == 3) {
+      await submitOrder();
+      navigate('/');
+      return;
+    }
     setActive((current) => {
       // Advance to the next step if not on the last step
       return current < 3 ? current + 1 : current;
     });
   };
 
-  const prevStep = () =>
+  const prevStep = () => {
+    if (active == 0) {
+      navigate('/');
+      return;
+    }
     setActive((current) => (current > 0 ? current - 1 : current));
+  };
 
   const buttonText = active === 3 ? "Complete Order" : "Next step";
 
   const submitOrder = () => {
     axios
-      .post("http://localhost:5000/submitOrder", orderData)
+      .post("http://localhost:5000/submitOrder", {
+        token: localStorage.getItem("authToken"),
+        orderData: { ...orderData, products: cart }
+      })
       .then((response) => {
         console.log("Order submitted successfully:", response.data);
         // Reset the stepper or show a success message
@@ -37,11 +55,9 @@ const Checkout = () => {
   };
 
   // Handlers to update orderData
-  const updateCart = (cart) => setOrderData({ ...orderData, cart });
-  const updateShippingAddress = (address) =>
-    setOrderData({ ...orderData, shippingAddress: address });
-  const updatePaymentMethod = (method) =>
-    setOrderData({ ...orderData, paymentMethod: method });
+  const updateAddress = (address) =>
+    setOrderData({ ...orderData, address });
+
 
   return (
     <>
@@ -69,7 +85,7 @@ const Checkout = () => {
             label="Second step"
             description="Enter Shipping Address"
           >
-            <ShippingAddress />
+            <ShippingAddress onSubmit={updateAddress} />
           </Stepper.Step>
           <Stepper.Step label="Final step" description="Choose Payment Method">
             <PaymentMethod />

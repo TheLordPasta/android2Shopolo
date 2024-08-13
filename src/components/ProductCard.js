@@ -11,10 +11,12 @@ import {
 } from "@mantine/core";
 import "../styles/ProductCard.css";
 import { useCart } from "../contexts/CartContext";
+import useUserData from "./useUserData";
 
-const ProductCard = ({ id, image, name, description, price, category }) => {
+const ProductCard = ({ id, image, name, description, price, category, onDelete }) => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { admin } = useUserData();
 
   const handleAddToCart = () => {
     const product = { id, image, name, description, price, category, quantity };
@@ -69,6 +71,17 @@ const ProductCard = ({ id, image, name, description, price, category }) => {
           >
             Add to Cart
           </Button>
+          {admin &&
+            <Button
+              color="var(--color-primary)"
+              ml="sm"
+              mt="md"
+              radius="md"
+              onClick={() => onDelete(id)}
+            >
+              Delete product
+            </Button>
+          }
         </SimpleGrid>
       </Card>
     </div>

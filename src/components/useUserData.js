@@ -28,7 +28,8 @@ const useUserData = () => {
           setAdmin(true);
         }
 
-        setUserData(data.data);
+        if (data.status == 'ok')
+          setUserData(data.data);
 
         if (data.data === "token expired") {
           alert("Token expired, login again");
@@ -44,7 +45,12 @@ const useUserData = () => {
     fetchUserData();
   }, []);
 
-  return { userData, admin };
+  const logout = () => {
+    setUserData(null);
+    localStorage.removeItem("authToken");
+  };
+
+  return { userData, admin, logout };
 };
 
 export default useUserData;

@@ -17,7 +17,7 @@ const JWT_SECRET = "lksafdoasfoww2123441() ``kfldf``~~~rkf////[]{}..,*&%$&!@";
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: "GET,POST",
+    methods: "GET,POST,DELETE",
     credentials: true,
   })
 );
@@ -104,15 +104,17 @@ app.post("/userData", async (req, res) => {
   const { token } = req.body;
   try {
     const user = jwt.verify(token, JWT_SECRET);
-    const userName = user.username;
-    await User.findOne({ username: userName })
-      .then((data) => {
-        res.send({ status: "ok", data: data });
-      })
-      .catch((error) => {
-        res.send({ status: "error", data: error });
-      });
-  } catch (error) {}
+    const username = user.username;
+
+    const [dbUser, orders] = await Promise.all([
+      User.findOne({ username }).lean(),
+      Order.find({ username }).lean()
+    ]);
+    res.send({ status: "ok", data: { ...dbUser, orders } });
+  } catch (error) {
+    console.error(error);
+    res.send({ status: "error", data: error });
+  }
 });
 
 app.use(express.json());
@@ -137,13 +139,50 @@ app.post("/addProduct", (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// New route to handle order submission and save it to MongoDB
-app.post("/submitOrder", (req, res) => {
-  const newOrder = new Order(req.body); // Assuming req.body contains order data
-  newOrder
-    .save()
-    .then((order) => res.status(201).json(order)) // Use 201 for successful creation
+app.delete("/product/:id", (req, res) => {
+  const { id } = req.params;
+  Product.deleteOne({ id })
+    .then((product) => res.json({ status: "ok" }))
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+// New route to handle order submission and save it to MongoDB
+app.post("/submitOrder", async (req, res) => {
+  const { token, orderData } = req.body;
+
+  let username;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    username = user.username;
+  } catch {
+    return res.sendStatus(401);
+  }
+  const user = await User.findOne({ username });
+  if (!user) res.sendStatus(401);
+
+  const newOrder = new Order(orderData); // Assuming req.body contains order data
+  const products = await Product.find({ name: { $in: newOrder.products.map(p => p.name) } }).select({
+    name: 1,
+    category: 1,
+    description: 1,
+    image: 1,
+    price: 1,
+  }).lean();
+
+  newOrder.totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
+  newOrder.products = products;
+  newOrder.username = username;
+  newOrder.email = user.email;
+  newOrder.orderDate = new Date();
+
+  try {
+    await newOrder.save();
+    res.status(201).json(order);
+  }
+  catch {
+    res.status(400).json("Error: " + err);
+  }
+
 });
 
 //remove product to shopping and to mongoDB

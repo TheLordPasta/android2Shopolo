@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+const { v4 } = require("uuid");
 
 const productSchema = new mongoose.Schema(
   {
+    id: { type: String, default: v4 },
     name: { type: String, required: true },
     category: { type: String, required: true },
     description: { type: String, required: true },
@@ -15,3 +17,4 @@ const productSchema = new mongoose.Schema(
 
 const Product = mongoose.model("Product", productSchema);
 module.exports = Product;
+

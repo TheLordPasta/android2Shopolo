@@ -23,6 +23,13 @@ function Shopping() {
     setProducts([...products, newProduct]);
   };
 
+  const handleProductDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/product/${id}`)
+      .then(() => setProducts(prev => prev.filter(p => p.id != id)))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="Shopping">
       <Navbar
@@ -34,6 +41,7 @@ function Shopping() {
 
       <ConditionalAddProductForm onProductAdded={handleProductAdded} />
       <CategoriesTabs
+        onProductDeleted={handleProductDelete}
         menItems={products.filter((product) => product.category === "Men")}
         womenItems={products.filter((product) => product.category === "Women")}
         creatureItems={products.filter(

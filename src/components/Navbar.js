@@ -17,7 +17,7 @@ import SignUpFormDrawer from "./SignUpFormDrawer";
 const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
   const [opened, setOpened] = useState(false);
   const { colorScheme, setColorScheme } = useMantineColorScheme(); // Correct hook usage
-  const { userData } = useUserData();
+  const { userData, logout } = useUserData();
 
   const toggleColorScheme = () => {
     const newColorScheme = colorScheme === "dark" ? "light" : "dark";
@@ -60,8 +60,16 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
             {(styles) => (
               <div style={styles}>
                 <Group direction="column" spacing="xs" align="flex-start">
-                  <LoginFormDrawer />
-                  <SignUpFormDrawer />
+                  {!userData
+                    ? <>
+                      <LoginFormDrawer />
+                      <SignUpFormDrawer />
+                    </>
+                    : <Button color="var(--color-primary)" onClick={logout}>
+                      Logout
+                    </Button>
+                  }
+
                   <Button color="var(--color-primary)" onClick={onCartOpen}>
                     Cart
                   </Button>

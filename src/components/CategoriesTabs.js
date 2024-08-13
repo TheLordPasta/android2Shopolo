@@ -4,11 +4,11 @@ import { IconMan, IconWoman, IconSnowman } from "@tabler/icons-react";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 
-function CategotiesTabs({ menItems, womenItems, creatureItems }) {
+function CategotiesTabs({ menItems, womenItems, creatureItems, onProductDeleted }) {
   const iconStyle = { width: rem(30), height: rem(30) };
   const [searchTerm, setSearchTerm] = useState("");
-  const [minPrice, setMinPrice] = useState(""); // נוסף
-  const [maxPrice, setMaxPrice] = useState(""); // נוסף
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -90,6 +90,7 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
         <SimpleGrid cols={5} spacing="sm">
           {filterItems(menItems).map((item, index) => (
             <ProductCard
+              onDelete={onProductDeleted}
               key={index}
               image={item.image}
               name={item.name}
@@ -128,6 +129,7 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
         <SimpleGrid cols={5} spacing="sm">
           {filterItems(womenItems).map((item, index) => (
             <ProductCard
+              onDelete={onProductDeleted}
               key={index}
               image={item.image}
               name={item.name}
@@ -166,6 +168,7 @@ function CategotiesTabs({ menItems, womenItems, creatureItems }) {
         <SimpleGrid cols={5} spacing="sm">
           {filterItems(creatureItems).map((item, index) => (
             <ProductCard
+              onDelete={onProductDeleted}
               key={index}
               image={item.image}
               name={item.name}

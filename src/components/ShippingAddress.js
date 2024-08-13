@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ShippingAddress = ({ nextStep, prevStep }) => {
+const ShippingAddress = ({ onSubmit }) => {
   const [address, setAddress] = useState({
     street: "",
     city: "",
@@ -18,7 +18,7 @@ const ShippingAddress = ({ nextStep, prevStep }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    nextStep();
+    onSubmit(address);
   };
 
   return (
