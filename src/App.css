@@ -1,15 +1,20 @@
 /*colors*/
 @import "~@mantine/core/styles.css";
+@import url("https://fonts.googleapis.com/css2?family=Matemasie&display=swap");
 :root {
   --color-primary: #a55aff;
   --color-gradient: #895aff;
-  --color-base: #034730;
-  --color-base2: #023024;
-  --color-brand: #506de1;
-  --color-brand2: #6e8afb;
-  --sidebar-width: 250px;
-  --sidebar-width-extand: 270px;
-  --font-base: "Bai Jamjuree";
+}
+@font-face {
+  font-family: "EffiFont";
+  src: url("./resourses/Matemasie-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.username-placeholder-h1 {
+  font-family: "EffiFont", sans-serif;
+  text-shadow: 4px 4px var(--color-primary);
 }
 
 input {

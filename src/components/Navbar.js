@@ -11,9 +11,9 @@ import {
 } from "@mantine/core";
 import LoginFormDrawer from "./LoginFormDrawer";
 import SignUpFormDrawer from "./SignUpFormDrawer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { fetchStates, useUserData } from "../contexts/UserContext";
+import { useUserData } from "../contexts/UserContext";
 
 const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
   const [opened, setOpened] = useState(false);
@@ -27,7 +27,7 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
   };
 
   const goToOrderHistory = () => {
-    navigate('/order-history');
+    navigate("/order-history");
   };
 
   return (
@@ -45,9 +45,10 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
       <Container>
         <Group position="apart" align="center">
           <h1
-            style={{
-              textShadow: "4px 4px var(--color-primary)",
-            }}
+            className="username-placeholder-h1"
+            // style={{
+            //   textShadow: "4px 4px var(--color-primary)",
+            // }}
           >
             Hello {userData?.username || "Guest"}
           </h1>
@@ -76,7 +77,10 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
                       <Button color="var(--color-primary)" onClick={logout}>
                         Logout
                       </Button>
-                      <Button color="var(--color-primary)" onClick={goToOrderHistory}>
+                      <Button
+                        color="var(--color-primary)"
+                        onClick={goToOrderHistory}
+                      >
                         Order History
                       </Button>
                     </>
@@ -86,7 +90,10 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
                     Cart
                   </Button>
                   <Group spacing="xs" align="center">
-                    <Text>{`${colorScheme[0].toUpperCase()}${colorScheme.slice(1)}`} Mode</Text>
+                    <Text>
+                      {`${colorScheme[0].toUpperCase()}${colorScheme.slice(1)}`}{" "}
+                      Mode
+                    </Text>
                     <Switch
                       checked={colorScheme === "dark"}
                       onChange={toggleColorScheme} // Ensure toggleColorScheme is passed correctly

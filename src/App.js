@@ -15,11 +15,9 @@ function App() {
 
   return (
     <div className="App">
-      {fetchState == fetchStates.FETCHED &&
+      {fetchState === fetchStates.FETCHED && (
         <>
-          <Navbar
-            onCartOpen={() => setCartOpen(true)}
-          />
+          <Navbar onCartOpen={() => setCartOpen(true)} />
           <StartUpContainerLogo />
           <Routes>
             <Route path="/" element={<Shopping />} />
@@ -33,7 +31,7 @@ function App() {
             onClose={() => setCartOpen(false)}
           />
         </>
-      }
+      )}
     </div>
   );
 }

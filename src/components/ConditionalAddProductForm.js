@@ -5,7 +5,7 @@ import { useUserData } from "../contexts/UserContext";
 const ConditionalAddProductForm = ({ onProductAdded }) => {
   const { admin } = useUserData();
 
-  if (admin == false) {
+  if (admin === false) {
     return null;
   }
 

@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
 import CategoriesTabs from "./CategoriesTabs";
-import StartUpContainerLogo from "./StartUpContainerLogo";
-import ShoppingCartDrawer from "./ShoppingCartDrawer";
 import ConditionalAddProductForm from "./ConditionalAddProductForm";
 import axios from "axios";
 
 function Shopping() {
-  const [cartOpen, setCartOpen] = useState(false);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
