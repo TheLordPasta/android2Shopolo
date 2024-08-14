@@ -13,7 +13,15 @@ import "../styles/ProductCard.css";
 import { useCart } from "../contexts/CartContext";
 import useUserData from "./useUserData";
 
-const ProductCard = ({ id, image, name, description, price, category, onDelete }) => {
+const ProductCard = ({
+  id,
+  image,
+  name,
+  description,
+  price,
+  category,
+  onDelete,
+}) => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const { admin } = useUserData();
@@ -71,7 +79,7 @@ const ProductCard = ({ id, image, name, description, price, category, onDelete }
           >
             Add to Cart
           </Button>
-          {admin &&
+          {admin && (
             <Button
               color="var(--color-primary)"
               ml="sm"
@@ -81,7 +89,7 @@ const ProductCard = ({ id, image, name, description, price, category, onDelete }
             >
               Delete product
             </Button>
-          }
+          )}
         </SimpleGrid>
       </Card>
     </div>

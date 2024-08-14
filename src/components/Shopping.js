@@ -26,7 +26,7 @@ function Shopping() {
   const handleProductDelete = (id) => {
     axios
       .delete(`http://localhost:5000/product/${id}`)
-      .then(() => setProducts(prev => prev.filter(p => p.id != id)))
+      .then(() => setProducts((prev) => prev.filter((p) => p.id !== id)))
       .catch((err) => console.log(err));
   };
 

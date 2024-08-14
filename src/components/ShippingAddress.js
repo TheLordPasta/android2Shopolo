@@ -57,6 +57,7 @@ const ShippingAddress = ({ onSubmit }) => {
           <input
             type="text"
             name="zip"
+            pattern="\d*"
             value={address.zip}
             onChange={handleChange}
           />

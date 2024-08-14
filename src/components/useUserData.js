@@ -28,8 +28,7 @@ const useUserData = () => {
           setAdmin(true);
         }
 
-        if (data.status == 'ok')
-          setUserData(data.data);
+        if (data.status === "ok") setUserData(data.data);
 
         if (data.data === "token expired") {
           alert("Token expired, login again");

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Stepper, Button, Group, Container, Center } from "@mantine/core";
+import { Stepper, Button, Group, Container } from "@mantine/core";
 import "../styles/Checkout.css";
 import ShippingAddress from "./ShippingAddress";
 import PaymentMethod from "./PaymentMethod";
 import ShoppingCart from "./ShoppingCart";
-import { useCart } from '../contexts/CartContext';
+import { useCart } from "../contexts/CartContext";
 import axios from "axios";
 import videosrc from "../resourses/exampleMP4.mp4";
 import { useNavigate } from "react-router-dom";
@@ -15,11 +15,10 @@ const Checkout = () => {
   const { cart } = useCart();
   const navigate = useNavigate();
 
-
   const nextStep = async () => {
-    if (active == 3) {
+    if (active === 3) {
       await submitOrder();
-      navigate('/');
+      navigate("/");
       return;
     }
     setActive((current) => {
@@ -29,8 +28,8 @@ const Checkout = () => {
   };
 
   const prevStep = () => {
-    if (active == 0) {
-      navigate('/');
+    if (active === 0) {
+      navigate("/");
       return;
     }
     setActive((current) => (current > 0 ? current - 1 : current));
@@ -42,7 +41,7 @@ const Checkout = () => {
     axios
       .post("http://localhost:5000/submitOrder", {
         token: localStorage.getItem("authToken"),
-        orderData: { ...orderData, products: cart }
+        orderData: { ...orderData, products: cart },
       })
       .then((response) => {
         console.log("Order submitted successfully:", response.data);
@@ -55,9 +54,7 @@ const Checkout = () => {
   };
 
   // Handlers to update orderData
-  const updateAddress = (address) =>
-    setOrderData({ ...orderData, address });
-
+  const updateAddress = (address) => setOrderData({ ...orderData, address });
 
   return (
     <>

@@ -108,7 +108,7 @@ app.post("/userData", async (req, res) => {
 
     const [dbUser, orders] = await Promise.all([
       User.findOne({ username }).lean(),
-      Order.find({ username }).lean()
+      Order.find({ username }).lean(),
     ]);
     res.send({ status: "ok", data: { ...dbUser, orders } });
   } catch (error) {
@@ -161,13 +161,17 @@ app.post("/submitOrder", async (req, res) => {
   if (!user) res.sendStatus(401);
 
   const newOrder = new Order(orderData); // Assuming req.body contains order data
-  const products = await Product.find({ name: { $in: newOrder.products.map(p => p.name) } }).select({
-    name: 1,
-    category: 1,
-    description: 1,
-    image: 1,
-    price: 1,
-  }).lean();
+  const products = await Product.find({
+    name: { $in: newOrder.products.map((p) => p.name) },
+  })
+    .select({
+      name: 1,
+      category: 1,
+      description: 1,
+      image: 1,
+      price: 1,
+    })
+    .lean();
 
   newOrder.totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
   newOrder.products = products;
@@ -178,11 +182,7 @@ app.post("/submitOrder", async (req, res) => {
   try {
     await newOrder.save();
     res.status(201).json(order);
-  }
-  catch {
+  } catch {
     res.status(400).json("Error: " + err);
   }
-
 });
-
-//remove product to shopping and to mongoDB

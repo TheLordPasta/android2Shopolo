@@ -30,6 +30,7 @@ const PaymentMethod = ({ prevStep }) => {
           <input
             type="text"
             name="cardNumber"
+            pattern="\d{16}"
             value={paymentDetails.cardNumber}
             onChange={handleChange}
           />
@@ -48,6 +49,7 @@ const PaymentMethod = ({ prevStep }) => {
           <input
             type="text"
             name="cvv"
+            pattern="\d{3}"
             value={paymentDetails.cvv}
             onChange={handleChange}
           />

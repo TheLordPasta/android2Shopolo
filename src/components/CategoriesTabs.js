@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Tabs, rem, SimpleGrid, NumberInput } from "@mantine/core";
+import { Tabs, rem, SimpleGrid } from "@mantine/core";
 import { IconMan, IconWoman, IconSnowman } from "@tabler/icons-react";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 
-function CategotiesTabs({ menItems, womenItems, creatureItems, onProductDeleted }) {
+function CategotiesTabs({
+  menItems,
+  womenItems,
+  creatureItems,
+  onProductDeleted,
+}) {
   const iconStyle = { width: rem(30), height: rem(30) };
   const [searchTerm, setSearchTerm] = useState("");
   const [minPrice, setMinPrice] = useState("");

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import useUserData from "./useUserData";
 import {
   Container,
@@ -13,6 +12,7 @@ import {
 } from "@mantine/core";
 import LoginFormDrawer from "./LoginFormDrawer";
 import SignUpFormDrawer from "./SignUpFormDrawer";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
   const [opened, setOpened] = useState(false);
@@ -60,15 +60,16 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
             {(styles) => (
               <div style={styles}>
                 <Group direction="column" spacing="xs" align="flex-start">
-                  {!userData
-                    ? <>
+                  {!userData ? (
+                    <>
                       <LoginFormDrawer />
                       <SignUpFormDrawer />
                     </>
-                    : <Button color="var(--color-primary)" onClick={logout}>
+                  ) : (
+                    <Button color="var(--color-primary)" onClick={logout}>
                       Logout
                     </Button>
-                  }
+                  )}
 
                   <Button color="var(--color-primary)" onClick={onCartOpen}>
                     Cart

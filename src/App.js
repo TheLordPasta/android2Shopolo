@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Checkout from "./components/Checkout";
 import Shopping from "./components/Shopping";
