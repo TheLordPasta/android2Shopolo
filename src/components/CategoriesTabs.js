@@ -92,7 +92,7 @@ function CategotiesTabs({
             handleSearchChange={handleSearchChange}
           />
         </div>
-        <SimpleGrid cols={5} spacing="sm">
+        <SimpleGrid cols={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing="sm">
           {filterItems(menItems).map((item, index) => (
             <ProductCard
               onDelete={onProductDeleted}
@@ -131,7 +131,7 @@ function CategotiesTabs({
             handleSearchChange={handleSearchChange}
           />
         </div>
-        <SimpleGrid cols={5} spacing="sm">
+        <SimpleGrid cols={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing="sm">
           {filterItems(womenItems).map((item, index) => (
             <ProductCard
               onDelete={onProductDeleted}
@@ -170,7 +170,7 @@ function CategotiesTabs({
             handleSearchChange={handleSearchChange}
           />
         </div>
-        <SimpleGrid cols={5} spacing="sm">
+        <SimpleGrid cols={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing="sm">
           {filterItems(creatureItems).map((item, index) => (
             <ProductCard
               onDelete={onProductDeleted}

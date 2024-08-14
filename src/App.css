@@ -48,10 +48,6 @@ input {
   color: #61dafb;
 }
 
-.mantine-SimpleGrid-root	{
-  grid-auto-rows: 1fr;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

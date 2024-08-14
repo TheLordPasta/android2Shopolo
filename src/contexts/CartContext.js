@@ -4,6 +4,8 @@ const CartContext = createContext();
 
 const cartReducer = (state, action) => {
   switch (action.type) {
+    case "CLEAR_CART":
+      return [];
     case "ADD_TO_CART":
       const existingItemIndex = state.findIndex(
         (item) => item.name === action.product.name
@@ -45,9 +47,13 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: "UPDATE_QUANTITY", id, quantity });
   };
 
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity }}
+      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}
     >
       {children}
     </CartContext.Provider>

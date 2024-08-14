@@ -1,36 +1,21 @@
 import React, { useState } from "react";
 
-const ShippingAddress = ({ onSubmit }) => {
-  const [address, setAddress] = useState({
-    street: "",
-    city: "",
-    state: "",
-    zip: "",
-  });
+const ShippingAddress = ({ onAddressChange }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAddress((prevAddress) => ({
-      ...prevAddress,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(address);
+    onAddressChange({ [name]: value });
   };
 
   return (
     <div>
       <h3>Shipping Address</h3>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
           <label>Street:</label>
           <input
             type="text"
             name="street"
-            value={address.street}
             onChange={handleChange}
           />
         </div>
@@ -39,7 +24,6 @@ const ShippingAddress = ({ onSubmit }) => {
           <input
             type="text"
             name="city"
-            value={address.city}
             onChange={handleChange}
           />
         </div>
@@ -48,7 +32,6 @@ const ShippingAddress = ({ onSubmit }) => {
           <input
             type="text"
             name="state"
-            value={address.state}
             onChange={handleChange}
           />
         </div>
@@ -58,7 +41,6 @@ const ShippingAddress = ({ onSubmit }) => {
             type="text"
             name="zip"
             pattern="\d*"
-            value={address.zip}
             onChange={handleChange}
           />
         </div>

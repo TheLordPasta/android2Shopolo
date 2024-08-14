@@ -1,9 +1,10 @@
 .product-card {
   display: flex;
   overflow: hidden;
-  height: fit-content;
+  height: 100%;
   min-width: 100px;
   min-height: 100px;
+
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   justify-content: center;

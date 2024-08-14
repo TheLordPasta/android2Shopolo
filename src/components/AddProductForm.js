@@ -60,10 +60,9 @@ const AddProductForm = ({ onProductAdded }) => {
         borderWidth: "0.2px",
         borderColor: "var(--mantine-color-grape-text)",
         maxWidth: "400px",
-        marginLeft: "40%",
+        marginInline: "auto",
         padding: "20px",
-        marginBottom: "40px",
-        marginTop: "40px",
+        marginBlock: "40px",
       }}
     >
       <Card.Section>

@@ -1,0 +1,60 @@
+.OrderHistory {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.OrderHistory h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+}
+
+.OrderHistory ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.OrderHistory li {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+}
+
+.OrderHistory li h3 {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.OrderHistory li ul {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.OrderHistory li ul li {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.OrderHistory li ul li img {
+    border-radius: 4px;
+    margin-right: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.OrderHistory li ul li p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+.OrderHistory li p {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #333;
+    margin-top: 1rem;
+}

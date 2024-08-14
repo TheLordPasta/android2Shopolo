@@ -1,6 +1,6 @@
 import React from "react";
 import AddProductForm from "./AddProductForm";
-import useUserData from "./useUserData";
+import { useUserData } from "../contexts/UserContext";
 
 const ConditionalAddProductForm = ({ onProductAdded }) => {
   const { admin } = useUserData();

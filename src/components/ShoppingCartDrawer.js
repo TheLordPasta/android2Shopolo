@@ -16,7 +16,7 @@ const ShoppingCartDrawer = ({ isOpen, onClose }) => {
     >
       <ShoppingCart />
       <Link to="/checkout">
-        <Button color="var(--color-primary)">Proceed to Checkout</Button>
+        <Button onClick={onClose} color="var(--color-primary)">Proceed to Checkout</Button>
       </Link>
     </Drawer>
   );

@@ -1,4 +1,3 @@
-import useUserData from "./useUserData";
 import {
   Container,
   Group,
@@ -12,16 +11,23 @@ import {
 } from "@mantine/core";
 import LoginFormDrawer from "./LoginFormDrawer";
 import SignUpFormDrawer from "./SignUpFormDrawer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { fetchStates, useUserData } from "../contexts/UserContext";
 
 const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
   const [opened, setOpened] = useState(false);
   const { colorScheme, setColorScheme } = useMantineColorScheme(); // Correct hook usage
   const { userData, logout } = useUserData();
+  const navigate = useNavigate();
 
   const toggleColorScheme = () => {
     const newColorScheme = colorScheme === "dark" ? "light" : "dark";
     setColorScheme(newColorScheme); // Update the color scheme using setColorScheme
+  };
+
+  const goToOrderHistory = () => {
+    navigate('/order-history');
   };
 
   return (
@@ -66,16 +72,21 @@ const Navbar = ({ onSignIn, onLogin, onCartOpen }) => {
                       <SignUpFormDrawer />
                     </>
                   ) : (
-                    <Button color="var(--color-primary)" onClick={logout}>
-                      Logout
-                    </Button>
+                    <>
+                      <Button color="var(--color-primary)" onClick={logout}>
+                        Logout
+                      </Button>
+                      <Button color="var(--color-primary)" onClick={goToOrderHistory}>
+                        Order History
+                      </Button>
+                    </>
                   )}
 
                   <Button color="var(--color-primary)" onClick={onCartOpen}>
                     Cart
                   </Button>
                   <Group spacing="xs" align="center">
-                    <Text>{colorScheme} Mode</Text>
+                    <Text>{`${colorScheme[0].toUpperCase()}${colorScheme.slice(1)}`} Mode</Text>
                     <Switch
                       checked={colorScheme === "dark"}
                       onChange={toggleColorScheme} // Ensure toggleColorScheme is passed correctly

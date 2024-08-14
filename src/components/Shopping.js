@@ -8,8 +8,6 @@ import axios from "axios";
 
 function Shopping() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [signInOpen, setSignInOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -32,13 +30,6 @@ function Shopping() {
 
   return (
     <div className="Shopping">
-      <Navbar
-        onSignIn={() => setSignInOpen(true)}
-        onLogin={() => setLoginOpen(true)}
-        onCartOpen={() => setCartOpen(true)}
-      />
-      <StartUpContainerLogo />
-
       <ConditionalAddProductForm onProductAdded={handleProductAdded} />
       <CategoriesTabs
         onProductDeleted={handleProductDelete}
@@ -47,10 +38,6 @@ function Shopping() {
         creatureItems={products.filter(
           (product) => product.category === "Mythical Creatures"
         )}
-      />
-      <ShoppingCartDrawer
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
       />
     </div>
   );

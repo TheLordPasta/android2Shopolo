@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import "../styles/ProductCard.css";
 import { useCart } from "../contexts/CartContext";
-import useUserData from "./useUserData";
+import { useUserData } from "../contexts/UserContext";
 
 const ProductCard = ({
   id,
@@ -59,6 +59,7 @@ const ProductCard = ({
         <Text className="product-details" size="md" c="dimmed">
           {description}
         </Text>
+        <div style={{ flexGrow: 1 }}></div>
         <SimpleGrid cols={2}>
           <NumberInput
             value={quantity}

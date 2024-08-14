@@ -106,11 +106,22 @@ app.post("/userData", async (req, res) => {
     const user = jwt.verify(token, JWT_SECRET);
     const username = user.username;
 
-    const [dbUser, orders] = await Promise.all([
-      User.findOne({ username }).lean(),
-      Order.find({ username }).lean(),
-    ]);
-    res.send({ status: "ok", data: { ...dbUser, orders } });
+    const data = await User.findOne({ username }).lean();
+    res.send({ status: "ok", data });
+  } catch (error) {
+    console.error(error);
+    res.send({ status: "error", data: error });
+  }
+});
+
+app.post("/fetchOrders", async (req, res) => {
+  const { token } = req.body;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    const username = user.username;
+
+    const data = await Order.find({ username }).lean();
+    res.send({ status: "ok", data });
   } catch (error) {
     console.error(error);
     res.send({ status: "error", data: error });
@@ -150,15 +161,12 @@ app.delete("/product/:id", (req, res) => {
 app.post("/submitOrder", async (req, res) => {
   const { token, orderData } = req.body;
 
-  let username;
+  let username, user;
   try {
     const user = jwt.verify(token, JWT_SECRET);
     username = user.username;
-  } catch {
-    return res.sendStatus(401);
-  }
-  const user = await User.findOne({ username });
-  if (!user) res.sendStatus(401);
+    user = await User.findOne({ username });
+  } catch { }
 
   const newOrder = new Order(orderData); // Assuming req.body contains order data
   const products = await Product.find({
@@ -176,13 +184,13 @@ app.post("/submitOrder", async (req, res) => {
   newOrder.totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
   newOrder.products = products;
   newOrder.username = username;
-  newOrder.email = user.email;
+  newOrder.email = user?.email;
   newOrder.orderDate = new Date();
 
   try {
     await newOrder.save();
-    res.status(201).json(order);
-  } catch {
+    res.status(201).json(newOrder);
+  } catch (err) {
     res.status(400).json("Error: " + err);
   }
 });

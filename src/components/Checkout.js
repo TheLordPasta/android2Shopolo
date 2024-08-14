@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Stepper, Button, Group, Container } from "@mantine/core";
 import "../styles/Checkout.css";
 import ShippingAddress from "./ShippingAddress";
@@ -11,13 +11,19 @@ import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const [active, setActive] = useState(0);
-  const [orderData, setOrderData] = useState({});
-  const { cart } = useCart();
+  const addressRef = useRef({
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
+  });
+  const { cart, clearCart } = useCart();
   const navigate = useNavigate();
 
   const nextStep = async () => {
     if (active === 3) {
       await submitOrder();
+      clearCart();
       navigate("/");
       return;
     }
@@ -41,7 +47,7 @@ const Checkout = () => {
     axios
       .post("http://localhost:5000/submitOrder", {
         token: localStorage.getItem("authToken"),
-        orderData: { ...orderData, products: cart },
+        orderData: { address: addressRef.current, products: cart },
       })
       .then((response) => {
         console.log("Order submitted successfully:", response.data);
@@ -53,8 +59,9 @@ const Checkout = () => {
       });
   };
 
-  // Handlers to update orderData
-  const updateAddress = (address) => setOrderData({ ...orderData, address });
+  const updateAddress = (updatePayload) => {
+    addressRef.current = { ...addressRef.current, ...updatePayload };
+  };
 
   return (
     <>
@@ -82,7 +89,7 @@ const Checkout = () => {
             label="Second step"
             description="Enter Shipping Address"
           >
-            <ShippingAddress onSubmit={updateAddress} />
+            <ShippingAddress onAddressChange={updateAddress} />
           </Stepper.Step>
           <Stepper.Step label="Final step" description="Choose Payment Method">
             <PaymentMethod />
